@@ -1,5 +1,35 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgb(30, 35, 46);
+  background: -moz-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e232e",endColorstr="#331e5b",GradientType=1);
+
+  overflow-x: hidden;
+  position: absolute;
 }
 
 .App-logo {
@@ -35,4 +65,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.svg-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.glass-effect {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.7px);
+  -webkit-backdrop-filter: blur(8.7px);
 }
