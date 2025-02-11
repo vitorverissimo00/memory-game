@@ -1,13 +1,16 @@
 import React from 'react'
 import { TopIconContainer, BottomIconContainer, MainContainer } from './styles'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 const BgIcon = () => {
+  const { width, height } = useWindowSize()
+
   return (
     <MainContainer>
       <TopIconContainer>
         <svg
-          width="450"
-          height="556"
+          width={width < 1200 ? '150' : '450'}
+          height={height < 900 ? '350' : '556'}
           viewBox="0 0 450 556"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +142,8 @@ const BgIcon = () => {
       </TopIconContainer>
       <BottomIconContainer>
         <svg
-          width="364"
-          height="201"
+          width={width < 1200 ? '160' : '364'}
+          height={height < 900 ? '80' : '201'}
           viewBox="0 0 364 201"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

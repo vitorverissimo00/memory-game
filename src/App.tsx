@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <GameBoard />
+      <div style={{ zIndex: 2 }}>
+        <GameBoard />
+      </div>
       <BgIcon />
     </div>
   )
