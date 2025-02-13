@@ -1,20 +1,17 @@
 import React from 'react'
 import {
-  HeaderTitle,
   MainContainer,
   ContentContainer,
-  TrophyContainer,
+  HeaderTitle,
+  TrophyIcon,
 } from './styles'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <MainContainer className="glass-effect">
       <ContentContainer>
         <HeaderTitle className="noselect">Memory Game</HeaderTitle>
-        <TrophyContainer>
-          <FontAwesomeIcon icon="trophy" fontSize="26px" />
-        </TrophyContainer>
+        <TrophyIcon icon="trophy" />
       </ContentContainer>
     </MainContainer>
   )

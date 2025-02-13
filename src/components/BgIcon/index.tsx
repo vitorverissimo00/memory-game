@@ -2,7 +2,7 @@ import React from 'react'
 import { TopIconContainer, BottomIconContainer, MainContainer } from './styles'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
-const BgIcon = () => {
+const BgIcon: React.FC = () => {
   const { width, height } = useWindowSize()
 
   return (

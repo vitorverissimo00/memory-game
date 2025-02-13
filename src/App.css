@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   background: rgb(30, 35, 46);
   background: -moz-linear-gradient(
@@ -32,47 +31,21 @@
   position: absolute;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.game-board-wrapper {
+  z-index: 2;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  align-items: center;
+  
+  width: 100%;
+  height: 100%;
+  padding: 24px;
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @media (min-width: 384px) and (max-width: 768px) {
+    padding: 8px;
+    height: 100%;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.svg-main {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
 }
 
 .glass-effect {
