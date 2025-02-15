@@ -1,38 +1,119 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  width: 100vw;
+  height: 100%;
+
+  background: rgb(30, 35, 46);
+  background: -moz-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e232e",endColorstr="#331e5b",GradientType=1);
+
+  overflow-x: hidden;
+  position: absolute;
+}
+
+.game-board-wrapper {
+  z-index: 2;
+  position: relative;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+
+  @media (min-width: 384px) and (max-width: 768px) {
+    padding: 8px;
+    height: 100%;
+  }
 }
 
-.App-link {
-  color: #61dafb;
+.glass-effect {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.7px);
+  -webkit-backdrop-filter: blur(8.7px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.device-restriction-message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 8px;
+  margin: 0;
+
+  background: rgb(30, 35, 46);
+  background: -moz-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e232e",endColorstr="#331e5b",GradientType=1);
+
+  overflow: hidden;
+}
+
+.device-restriction-message h1 {
+  font-size: 16px;
+  color: #fafafa;
+}
+
+.device-restriction-message p {
+  font-size: 18px;
+  color: #fafafa;
 }
