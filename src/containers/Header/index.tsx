@@ -6,12 +6,15 @@ import {
   TrophyIcon,
 } from './styles'
 
-const Header: React.FC = () => {
+interface HeaderPropsInterface {
+  onClickTrophy: VoidFunction
+}
+const Header: React.FC<HeaderPropsInterface> = ({ onClickTrophy }) => {
   return (
     <MainContainer className="glass-effect">
       <ContentContainer>
         <HeaderTitle className="noselect">Memory Game</HeaderTitle>
-        <TrophyIcon icon="trophy" />
+        <TrophyIcon icon="trophy" onClick={onClickTrophy} />
       </ContentContainer>
     </MainContainer>
   )

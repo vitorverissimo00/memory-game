@@ -47,4 +47,6 @@ export const TrophyIcon = styled(FontAwesomeIcon)`
   &:hover {
     color: gold;
   }
+
+  cursor: pointer;
 `
