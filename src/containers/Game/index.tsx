@@ -64,7 +64,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
     if (elapsedTime !== null && userFinished) {
       setHasWon(true)
     }
-  }, [elapsedTime])
+  }, [elapsedTime, userFinished])
 
   /** Consts */
   const canShowError =
@@ -84,7 +84,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
   /**
    * Calculate the score based on elapsed time and move count.
    */
-  const calculateScore = (): number => {
+  const calculateScore = useCallback((): number => {
     if (elapsedTime === null) return 0
 
     const maxScore = 1000 // Maximum possible score
@@ -94,7 +94,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
 
     // Ensure the score doesn't go below 0
     return Math.max(0, maxScore - timePenalty - movePenalty)
-  }
+  }, [elapsedTime, moveCount])
 
   /**
    * Handles the logic for when a card is clicked in the memory game.
@@ -161,7 +161,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
     [gameCards, clickedCards, isClickDisabled]
   )
 
-  const cancelAndGoBack = () => {
+  const cancelAndGoBack = useCallback(() => {
     // Reset all game-related states
     setGameCards([]) // Clear the game cards
     setClickedCards([]) // Clear the clicked cards
@@ -172,7 +172,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
 
     // Optionally, fetch new cards if needed
     onCancel()
-  }
+  }, [onCancel]) // Add onCancel to the dependency array
 
   const renderGameCards = useCallback(() => {
     return (
