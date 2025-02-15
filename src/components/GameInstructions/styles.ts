@@ -66,21 +66,6 @@ export const ListItem = styled.li`
   }
 `
 
-export const StartButton = styled.button`
-  background: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1.24px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:hover {
-    background: #45a049;
-  }
-`
-
 export const SectionsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -88,5 +73,4 @@ export const SectionsContainer = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
-
 `

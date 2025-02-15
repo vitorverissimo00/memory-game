@@ -1,8 +1,41 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div``
+// Styled components
+export const MainContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+`
 
-export const StartGameButton = styled.div`
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+`
+
+export const Input = styled.input`
+  padding: 14px;
+  font-size: 16px;
+  border-width: 1px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #cccccc;
+  border-style: solid;
+  border-radius: 24px;
+  box-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
+
+  text-align: center;
+
+  &:focus {
+    color: #331e5b;
+    outline: none;
+  }
+`
+
+export const Button = styled.button`
   @property --myColor1 {
     syntax: '<color>';
     initial-value: rgb(217, 98, 119);
@@ -30,6 +63,7 @@ export const StartGameButton = styled.div`
 
   color: #fafafa;
   border-radius: 50px;
+  border: none;
 
   background: linear-gradient(90deg, var(--myColor1), var(--myColor2) 65%);
   transition: --myColor1 0.8s, --myColor2 0.8s;
@@ -41,8 +75,6 @@ export const StartGameButton = styled.div`
     --myColor1: rgb(51, 30, 91);
     --myColor2: rgb(217, 98, 119);
   }
-
-  margin-top: 32px;
 
   @media (min-width: 384px) and (max-width: 768px) {
     font-size: 24px;
@@ -57,34 +89,7 @@ export const StartGameButton = styled.div`
     height: auto;
     padding: 8px;
   }
-`
 
-export const StartGameMainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 384px) and (max-width: 768px) {
-    overflow-y: scroll;
-    height: 75vh;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-`
-
-export const ModalContentContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  background-color: white;
-  padding: 32px;
-  border-radius: 24px;
-  width: 30vw;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  text-align: center;
-
-  min-height: 40vh;
-  max-height: 80vh;
+  margin-top: 32px;
+  margin-bottom: 8px;
 `

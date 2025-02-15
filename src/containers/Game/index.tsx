@@ -16,9 +16,10 @@ import { StartGameButton } from '../GameBoard/styles'
 
 interface GamePropsInterface {
   onCancel: VoidFunction
+  onSendScore: (score: number) => void
 }
 
-const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
+const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
   const INITIAL_PAIRS = 10
 
   /**
@@ -27,9 +28,10 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
   const [gameCards, setGameCards] = useState<CardInterface[]>([])
   const [clickedCards, setClickedCards] = useState<CardInterface[]>([]) // Track clicked cards
   const [hasWon, setHasWon] = useState<boolean>(false)
-  const [elapsedTime, setElapsedTime] = useState<string | null>(null)
+  const [elapsedTime, setElapsedTime] = useState<string | null>(null) // Track elapsed time as a string
   const [isClickDisabled, setIsClickDisabled] = useState<boolean>(false) // Prevent rapid clicks
   const [userFinished, setUserFinished] = useState<boolean>(false)
+  const [moveCount, setMoveCount] = useState<number>(0) // Track the number of moves
 
   /**
    * Hooks
@@ -64,12 +66,6 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
     }
   }, [elapsedTime])
 
-  useEffect(() => {
-    if (hasWon) {
-      console.log('User has won!', elapsedTime)
-    }
-  }, [hasWon])
-
   /** Consts */
   const canShowError =
     !hasWon && elapsedTime !== null && gameCards.length < 0 && error
@@ -78,12 +74,30 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
   const canShowBoard = !loading && gameCards.length > 0 && !hasWon
 
   /**
+   * Convert time string (HH:MM:SS) to total seconds.
+   */
+  const parseTimeToSeconds = (time: string): number => {
+    const [hours, minutes, seconds] = time.split(':').map(Number)
+    return hours * 3600 + minutes * 60 + seconds
+  }
+
+  /**
+   * Calculate the score based on elapsed time and move count.
+   */
+  const calculateScore = (): number => {
+    if (elapsedTime === null) return 0
+
+    const maxScore = 1000 // Maximum possible score
+    const timeInSeconds = parseTimeToSeconds(elapsedTime) // Convert time to seconds
+    const timePenalty = timeInSeconds * 10 // Penalty for time taken
+    const movePenalty = moveCount * 5 // Penalty for number of moves
+
+    // Ensure the score doesn't go below 0
+    return Math.max(0, maxScore - timePenalty - movePenalty)
+  }
+
+  /**
    * Handles the logic for when a card is clicked in the memory game.
-   *
-   * This function manages the flipping of cards, checking for matches, and updating the game state accordingly.
-   * It prevents further clicks while cards are being processed and ensures that matched cards are disabled.
-   *
-   * @param {CardInterface} card - The card that was clicked.
    */
   const handleCardClick = useCallback(
     (card: CardInterface) => {
@@ -103,6 +117,9 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
       if (!cardCanBeSelected) {
         return
       }
+
+      // Increment move count
+      setMoveCount((prev) => prev + 1)
 
       // Flip the clicked card
       const updatedCards = gameCards.map((gameCard) =>
@@ -151,14 +168,12 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
     setHasWon(false) // Reset the win flag
     setElapsedTime(null) // Reset the timer
     setIsClickDisabled(false) // Re-enable clicks
+    setMoveCount(0) // Reset move count
 
     // Optionally, fetch new cards if needed
     onCancel()
   }
 
-  /**
-   * Renders
-   */
   const renderGameCards = useCallback(() => {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -187,12 +202,17 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
         <Subtitle>
           Time: {elapsedTime !== null ? elapsedTime : '--:--:--'}
         </Subtitle>
+        <StartGameButton
+          onClick={() => onSendScore(calculateScore())} // Send the calculated score
+        >
+          Send Score
+        </StartGameButton>
         <StartGameButton onClick={() => cancelAndGoBack()}>
           Exit
         </StartGameButton>
       </WinContainer>
     ),
-    [elapsedTime]
+    [elapsedTime, moveCount]
   )
 
   const renderLoadingMessage = useCallback(
@@ -205,7 +225,12 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
   )
 
   const renderTimer = () => {
-    return <Timer stop={userFinished} onStop={(time) => setElapsedTime(time)} />
+    return (
+      <Timer
+        stop={userFinished}
+        onStop={(time) => setElapsedTime(time)} // Track elapsed time as a string
+      />
+    )
   }
 
   const renderErrorMessage = useCallback(

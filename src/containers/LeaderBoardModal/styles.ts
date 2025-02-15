@@ -13,7 +13,7 @@ export const ModalOverlay = styled.div`
   z-index: 1000;
 `
 
-export const ModalContent = styled.div`
+export const ModalContentMainContainer = styled.div`
   background-color: white;
   padding: 32px;
   border-radius: 24px;

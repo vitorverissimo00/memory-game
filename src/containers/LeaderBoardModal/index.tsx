@@ -3,7 +3,7 @@ import {
   CloseButton,
   LeaderboardItem,
   LeaderboardList,
-  ModalContent,
+  ModalContentMainContainer,
   ModalOverlay,
 } from './styles'
 import { Title } from '../../components/GameInstructions/styles'
@@ -25,17 +25,17 @@ const LeaderBoardModal: React.FC<LeaderBoardModalProps> = ({ onClose }) => {
   if (loading) {
     return (
       <ModalOverlay>
-        <ModalContent>
+        <ModalContentMainContainer>
           <CloseButton onClick={onClose}>❌</CloseButton>
           <LoadingSpinner />
-        </ModalContent>
+        </ModalContentMainContainer>
       </ModalOverlay>
     )
   }
 
   return (
     <ModalOverlay>
-      <ModalContent>
+      <ModalContentMainContainer>
         <CloseButton onClick={onClose}>❌</CloseButton>
         <Title>Leaderboard</Title>
 
@@ -52,7 +52,7 @@ const LeaderBoardModal: React.FC<LeaderBoardModalProps> = ({ onClose }) => {
             </LeaderboardItem>
           ))}
         </LeaderboardList>
-      </ModalContent>
+      </ModalContentMainContainer>
     </ModalOverlay>
   )
 }

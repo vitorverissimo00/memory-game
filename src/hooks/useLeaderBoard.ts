@@ -10,10 +10,11 @@ interface UseLeaderBoardReturn {
   loading: boolean
   error: string | undefined
   fetchLeaderBoard: () => Promise<void>
+  sendScore: (name: string, score: number) => Promise<void>
 }
 
 /**
- * Custom hook to fetch leaderboard data
+ * Custom hook to fetch leaderboard data and send scores
  * @returns {UseLeaderBoardReturn}
  */
 const useLeaderBoard = (): UseLeaderBoardReturn => {
@@ -48,7 +49,7 @@ const useLeaderBoard = (): UseLeaderBoardReturn => {
       }
     } catch (err) {
       if (axios.isCancel(err)) {
-        console.log('Request canceled:', err.message)
+        console.debug('Request canceled:', err.message)
       } else {
         console.error('Error fetching leaderboard data:', err)
         setError((err as Error).message || 'An unexpected error occurred')
@@ -59,6 +60,35 @@ const useLeaderBoard = (): UseLeaderBoardReturn => {
     }
   }, [])
 
+  const sendScore = async (name: string, score: number) => {
+    setLoading(true)
+    setError(undefined)
+
+    try {
+      // Send the score to the API
+      const response: AxiosResponse<LeaderBoardResponseInterface> =
+        await axios.post(
+          `https://memory-game-api-kyls.onrender.com/board/save-rank`,
+          {
+            name,
+            score,
+          }
+        )
+
+      if (!response.data.success) {
+        throw new Error(response.data.message || 'Failed to send score')
+      }
+
+      // Refresh the leaderboard after sending the score
+      await fetchLeaderBoard()
+    } catch (err) {
+      console.error('Error sending score:', err)
+      setError((err as Error).message || 'An unexpected error occurred')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // Cleanup function to cancel the request if the component unmounts
   React.useEffect(() => {
     return () => {
@@ -68,7 +98,7 @@ const useLeaderBoard = (): UseLeaderBoardReturn => {
     }
   }, [])
 
-  return { leaderBoard, loading, error, fetchLeaderBoard }
+  return { leaderBoard, loading, error, fetchLeaderBoard, sendScore }
 }
 
 export default useLeaderBoard

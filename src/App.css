@@ -71,3 +71,49 @@
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
+
+.device-restriction-message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 8px;
+  margin: 0;
+
+  background: rgb(30, 35, 46);
+  background: -moz-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  background: linear-gradient(
+    145deg,
+    rgba(30, 35, 46, 1) 0%,
+    rgba(51, 30, 91, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e232e",endColorstr="#331e5b",GradientType=1);
+
+  overflow: hidden;
+}
+
+.device-restriction-message h1 {
+  font-size: 16px;
+  color: #fafafa;
+}
+
+.device-restriction-message p {
+  font-size: 18px;
+  color: #fafafa;
+}

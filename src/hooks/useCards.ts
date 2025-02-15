@@ -45,7 +45,7 @@ const useCards = (): UseCardsReturn => {
       }
     } catch (err) {
       if (axios.isCancel(err)) {
-        console.log('Request canceled:', err.message)
+        console.debug('Request canceled:', err.message)
       } else {
         console.error('Error fetching cards:', err)
         setError((err as Error).message || 'An unexpected error occurred')
