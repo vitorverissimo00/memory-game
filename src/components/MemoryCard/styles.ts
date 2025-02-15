@@ -1,35 +1,35 @@
 import styled from 'styled-components'
 
-export const MainContainer = styled.div<{ isDisabled: boolean }>`
+export const MainContainer = styled.div<{ $isDisabled: boolean }>`
   width: 80px;
   height: 120px;
   margin: 16px;
   perspective: 1000px;
   position: relative;
   overflow: visible;
-  cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   transition: transform 0.3s ease;
 
-  ${({ isDisabled }) =>
-    isDisabled &&
+  ${({ $isDisabled }) =>
+    $isDisabled &&
     `
     opacity: 0.4;
   `}
 
   &:hover {
-    transform: ${({ isDisabled }) =>
-      isDisabled ? 'none' : 'translateY(-8px) rotateZ(1deg)'};
+    transform: ${({ $isDisabled }) =>
+      $isDisabled ? 'none' : 'translateY(-8px) rotateZ(1deg)'};
   }
 `
 
-export const CardInner = styled.div<{ isFlipped: boolean }>`
+export const CardInner = styled.div<{ $isFlipped: boolean }>`
   width: 100%;
   height: 100%;
   position: relative;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  transform: ${({ isFlipped }) =>
-    isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'};
+  transform: ${({ $isFlipped }) =>
+    $isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'};
 `
 
 export const CardFace = styled.div`
@@ -46,7 +46,7 @@ export const CardFace = styled.div`
   color: #5d597b;
 `
 
-export const CardFront = styled(CardFace)<{ isDisabled: boolean }>`
+export const CardFront = styled(CardFace)<{ $isDisabled: boolean }>`
   background: rgb(250, 250, 250);
   background: linear-gradient(
     211deg,
@@ -54,8 +54,8 @@ export const CardFront = styled(CardFace)<{ isDisabled: boolean }>`
     rgba(228, 231, 238, 1) 100%
   );
 
-  ${({ isDisabled }) =>
-    isDisabled &&
+  ${({ $isDisabled }) =>
+    $isDisabled &&
     `
     background-color: #4b4b4b;
     color: #e0e0e0;
@@ -72,7 +72,7 @@ export const CardBack = styled(CardFace)`
   );
 `
 
-export const CardShadow = styled.div<{ isFlipped: boolean }>`
+export const CardShadow = styled.div<{ $isFlipped: boolean }>`
   position: absolute;
   bottom: -10px;
   left: 50%;
@@ -81,8 +81,8 @@ export const CardShadow = styled.div<{ isFlipped: boolean }>`
   background: rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   transform: translateX(-50%)
-    ${({ isFlipped }) => (isFlipped ? 'scaleX(1.2)' : 'scaleX(1)')};
-  opacity: ${({ isFlipped }) => (isFlipped ? '0.15' : '0.3')};
+    ${({ $isFlipped }) => ($isFlipped ? 'scaleX(1.2)' : 'scaleX(1)')};
+  opacity: ${({ $isFlipped }) => ($isFlipped ? '0.15' : '0.3')};
   transition: all 0.6s;
   filter: blur(5px);
   z-index: -1;

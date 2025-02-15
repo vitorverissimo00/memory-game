@@ -23,12 +23,12 @@ const MemoryCard: React.FC<MemoryCardProps> = ({
 }) => (
   <MainContainer
     onClick={() => !isDisabled && onClick(cardData)}
-    isDisabled={isDisabled}
+    $isDisabled={isDisabled}
     className="prevent-select"
   >
-    <CardShadow isFlipped={isFlipped} />
-    <CardInner isFlipped={isFlipped}>
-      <CardFront isDisabled={isDisabled}>?</CardFront>
+    <CardShadow $isFlipped={isFlipped} />
+    <CardInner $isFlipped={isFlipped}>
+      <CardFront $isDisabled={isDisabled}>?</CardFront>
       <CardBack>{cardData.content}</CardBack>
     </CardInner>
   </MainContainer>
