@@ -1,5 +1,11 @@
 import React from 'react'
-import { MainContainer } from './styles'
+import {
+  MainContainer,
+  CardInner,
+  CardFront,
+  CardBack,
+  CardShadow,
+} from './styles'
 import { CardInterface } from '../../interfaces/cardsInterfaces'
 
 interface MemoryCardProps {
@@ -16,11 +22,15 @@ const MemoryCard: React.FC<MemoryCardProps> = ({
   isDisabled,
 }) => (
   <MainContainer
-    onClick={() => onClick(cardData)}
-    isFlipped={isFlipped}
+    onClick={() => !isDisabled && onClick(cardData)}
     isDisabled={isDisabled}
+    className="prevent-select"
   >
-    {cardData.content}
+    <CardShadow isFlipped={isFlipped} />
+    <CardInner isFlipped={isFlipped}>
+      <CardFront isDisabled={isDisabled}>?</CardFront>
+      <CardBack>{cardData.content}</CardBack>
+    </CardInner>
   </MainContainer>
 )
 
