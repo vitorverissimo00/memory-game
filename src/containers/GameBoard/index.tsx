@@ -39,7 +39,7 @@ const GameBoard: React.FC<GameBoardPropsInterface> = ({
     if (isGameStarted) {
       onGameStatusChanged(GAME_STATUS.STARTED)
     }
-  }, [isGameStarted])
+  }, [isGameStarted, onGameStatusChanged])
 
   const handleSendScore = async ({ name }: { name: string }) => {
     await sendScore(name, userScore) // Use the tracked userScore

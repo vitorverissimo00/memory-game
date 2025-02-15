@@ -212,7 +212,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
         </StartGameButton>
       </WinContainer>
     ),
-    [elapsedTime, moveCount]
+    [elapsedTime, calculateScore, cancelAndGoBack, onSendScore]
   )
 
   const renderLoadingMessage = useCallback(
@@ -221,7 +221,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
         <LoadingSpinner />
       </LoadingContainer>
     ),
-    [loading]
+    []
   )
 
   const renderTimer = () => {
@@ -239,7 +239,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
         <Subtitle>Error. Please try again later...</Subtitle>
       </CardsContainer>
     ),
-    [loading]
+    []
   )
 
   // loader
