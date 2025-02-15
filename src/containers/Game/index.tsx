@@ -34,16 +34,16 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel }) => {
   /**
    * Hooks
    */
-  const { getCards, cards, loading, error } = useCards()
+  const { fetchCards, cards, loading, error } = useCards()
 
   /**
    * UseEffects
    */
   useEffect(() => {
     if (cards.length === 0) {
-      getCards(INITIAL_PAIRS)
+      fetchCards(INITIAL_PAIRS)
     }
-  }, [cards, getCards])
+  }, [cards, fetchCards])
 
   useEffect(() => {
     setGameCards(cards)

@@ -1,21 +1,20 @@
 import React from 'react'
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, CancelTokenSource } from 'axios'
 import {
   CardInterface,
   CardsResponseInterface,
 } from '../interfaces/cardsInterfaces'
 import { formatCards } from '../utils/formatter'
-import { mock__cards } from '../mocks/cards.mock'
 
 interface UseCardsReturn {
   cards: CardInterface[]
   loading: boolean
-  getCards: (pairs: number) => Promise<void>
   error: string | undefined
+  fetchCards: (pairs: number) => Promise<void>
 }
 
 /**
- * Custom hook to get cards
+ * Custom hook to fetch cards
  * @returns {UseCardsReturn}
  */
 const useCards = (): UseCardsReturn => {
@@ -23,28 +22,50 @@ const useCards = (): UseCardsReturn => {
   const [loading, setLoading] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string | undefined>(undefined)
 
-  const getCards = React.useCallback(async (pairs: number) => {
+  const fetchCards = React.useCallback(async (pairs: number) => {
     setLoading(true)
+    setError(undefined)
+
+    let cancelTokenSource: CancelTokenSource | null = null
 
     try {
+      // Create a cancel token source
+      cancelTokenSource = axios.CancelToken.source()
+
+      // Fetch cards data
       const response: AxiosResponse<CardsResponseInterface> = await axios.get(
-        `https://memory-game-api-kyls.onrender.com/cards/?pairs=${pairs}`
+        `https://memory-game-api-kyls.onrender.com/cards/?pairs=${pairs}`,
+        { cancelToken: cancelTokenSource.token }
       )
+
       if (response.data.success) {
-        // setCards(formatCards(response.data.data))
-        setCards(formatCards(mock__cards))
+        setCards(formatCards(response.data.data))
       } else {
-        throw new Error(response.data.message)
+        throw new Error(response.data.message || 'Failed to fetch cards')
       }
     } catch (err) {
-      console.error('Unexpected error: Error at trying to get cards', err)
-      setError((err as Error).message)
+      if (axios.isCancel(err)) {
+        console.log('Request canceled:', err.message)
+      } else {
+        console.error('Error fetching cards:', err)
+        setError((err as Error).message || 'An unexpected error occurred')
+      }
     } finally {
       setLoading(false)
+      cancelTokenSource = null // Reset the cancel token source
     }
   }, [])
 
-  return { cards, loading, getCards, error }
+  // Cleanup function to cancel the request if the component unmounts
+  React.useEffect(() => {
+    return () => {
+      if (axios.CancelToken.source()) {
+        axios.CancelToken.source().cancel('Component unmounted')
+      }
+    }
+  }, [])
+
+  return { cards, loading, error, fetchCards }
 }
 
 export default useCards
