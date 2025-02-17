@@ -8,6 +8,7 @@ import {
   CardsContainer,
   DescriptionBoardContainer,
   LoadingContainer,
+  CardsMainContainer,
 } from './styles'
 import { Subtitle, Text, Title } from '../../components/GameInstructions/styles'
 import LoadingSpinner from '../../components/LoadingSpinner/Index'
@@ -176,10 +177,8 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
 
   const renderGameCards = useCallback(() => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <CardsContainer
-          style={{ width: gameCards.length > 20 ? 'auto' : '30vw' }}
-        >
+      <CardsMainContainer>
+        <CardsContainer>
           {gameCards.map((card) => (
             <div key={`memory-card-${card.id}`}>
               <MemoryCard
@@ -191,7 +190,7 @@ const Game: React.FC<GamePropsInterface> = ({ onCancel, onSendScore }) => {
             </div>
           ))}
         </CardsContainer>
-      </div>
+      </CardsMainContainer>
     )
   }, [gameCards, handleCardClick])
 

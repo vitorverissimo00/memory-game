@@ -13,8 +13,10 @@ export const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100%;
   width: 100%;
+  gap: 18px;
 `
 
 export const Spinner = styled.div`

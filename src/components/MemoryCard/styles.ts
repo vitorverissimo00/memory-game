@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const MainContainer = styled.div<{ $isDisabled: boolean }>`
   width: 80px;
   height: 120px;
+
   margin: 16px;
   perspective: 1000px;
   position: relative;
@@ -19,6 +20,34 @@ export const MainContainer = styled.div<{ $isDisabled: boolean }>`
   &:hover {
     transform: ${({ $isDisabled }) =>
       $isDisabled ? 'none' : 'translateY(-8px) rotateZ(1deg)'};
+  }
+
+  @media (max-width: 1200px) {
+    width: 50px;
+    height: 80px;
+
+    margin: 12px;
+  }
+
+  @media (max-width: 1700px) {
+    width: 70px;
+    height: 110px;
+
+    margin: 12px;
+  }
+
+  @media (max-width: 1400px) {
+    width: 50px;
+    height: 80px;
+
+    margin: 12px;
+  }
+
+  @media (max-width: 900px) {
+    width: 30px;
+    height: 45px;
+
+    margin: 4px;
   }
 `
 
@@ -44,6 +73,13 @@ export const CardFace = styled.div`
   border-radius: 18px;
   box-shadow: 0px 0px 3px rgba(117, 117, 117, 1);
   color: #5d597b;
+
+  @media (max-width: 1200px) {
+    border-radius: 8px;
+  }
+  @media (max-width: 1400px) {
+    border-radius: 20px;
+  }
 `
 
 export const CardFront = styled(CardFace)<{ $isDisabled: boolean }>`

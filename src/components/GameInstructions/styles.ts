@@ -13,6 +13,11 @@ export const Title = styled.span`
     font-size: 1.8rem;
     margin-bottom: 4px;
   }
+
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
 `
 
 export const Subtitle = styled.h2`
@@ -21,6 +26,11 @@ export const Subtitle = styled.h2`
   margin-bottom: 8px;
 
   @media (min-width: 384px) and (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 1024px) {
     font-size: 1rem;
     margin-bottom: 4px;
   }
@@ -37,6 +47,10 @@ export const Text = styled.p`
   line-height: 1.6;
 
   @media (min-width: 384px) and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 1024px) {
     font-size: 0.8rem;
   }
 `
@@ -62,6 +76,10 @@ export const ListItem = styled.li`
   }
 
   @media (min-width: 384px) and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 1024px) {
     font-size: 0.8rem;
   }
 `

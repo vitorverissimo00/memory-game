@@ -5,9 +5,9 @@ export const MainContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  gap: 16px;
 
-  width: 60vw;
-  height: 66vh;
+  width: fit-content;
 `
 
 export const WinContainer = styled.div`
@@ -31,6 +31,8 @@ export const DescriptionBoardContainer = styled.div`
   align-items: center;
   align-self: flex-start;
   padding: 16px;
+
+  width: 40%;
 `
 
 export const LoadingContainer = styled.div`
@@ -41,4 +43,17 @@ export const LoadingContainer = styled.div`
 
   width: 60vw;
   height: 66vh;
+`
+
+export const CardsMainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-width: 660px;
+  max-height: 600px;
+
+  @media (max-width: 1400px) {
+    max-width: 430px;
+    max-height: auto;
+  }
 `
