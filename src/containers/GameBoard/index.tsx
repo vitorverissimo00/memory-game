@@ -13,6 +13,7 @@ import SendScoreForm from '../../components/SendScoreForm'
 import useLeaderBoard from '../../hooks/useLeaderBoard'
 import LoadingSpinner from '../../components/LoadingSpinner/Index'
 import { Subtitle } from '../../components/GameInstructions/styles'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 interface GameBoardPropsInterface {
   onGameStatusChanged: (status: GAME_STATUS) => void
@@ -31,6 +32,7 @@ const GameBoard: React.FC<GameBoardPropsInterface> = ({
    * Hooks
    */
   const { sendScore, loading, error } = useLeaderBoard()
+  const { width } = useWindowSize()
 
   /**
    * UseEffects
@@ -98,10 +100,12 @@ const GameBoard: React.FC<GameBoardPropsInterface> = ({
   )
 
   return (
-    <Card>
-      {isGameStarted ? renderGame() : renderStartGame()}
+    <>
+      <Card width={width <= 1200 ? '70vw' : '60vw'}>
+        {isGameStarted ? renderGame() : renderStartGame()}
+      </Card>
       {isSendModalVisible && renderSendModal()}
-    </Card>
+    </>
   )
 }
 

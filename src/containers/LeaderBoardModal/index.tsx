@@ -39,7 +39,6 @@ const LeaderBoardModal: React.FC<LeaderBoardModalProps> = ({ onClose }) => {
         <CloseButton onClick={onClose}>❌</CloseButton>
         <Title>Leaderboard</Title>
 
-        {loading && <LoadingSpinner />}
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <LeaderboardList>

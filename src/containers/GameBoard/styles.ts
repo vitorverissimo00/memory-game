@@ -44,18 +44,13 @@ export const StartGameButton = styled.div`
 
   margin-top: 32px;
 
-  @media (min-width: 384px) and (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 24px;
-    width: 120px;
+    width: 230px;
     height: auto;
     padding: 8px;
-  }
 
-  @media (max-width: 320px) {
-    font-size: 18px;
-    width: 100px;
-    height: auto;
-    padding: 8px;
+    margin-top: 8px;
   }
 `
 
